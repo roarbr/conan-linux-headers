@@ -24,12 +24,16 @@ class LinuxHeadersConan(ConanFile):
         print('build(): arch: ' + str(self.settings.get_safe("arch")))
         print("package_folder: " + str(self.package_folder))
         with tools.chdir(self.source_folder):
-            if self.settings.arch == "x86_64":
-                print("Build ARCH=x86_64 headers_install")
-                self.run("make headers_install ARCH=x86_64 INSTALL_HDR_PATH=" + self.package_folder)
-            elif self.settings.arch == "armv8":
+            if self.settings.arch == "armv8":
+                # 64-bit ARM
                 print("Build ARCH=arm64 headers_install")
                 self.run("make headers_install ARCH=arm64 INSTALL_HDR_PATH=" + self.package_folder)
             elif "arm" in self.settings.arch:
+                # Assume 32-bit ARM
                 print("Build ARCH=arm headers_install")
                 self.run("make headers_install ARCH=arm INSTALL_HDR_PATH=" + self.package_folder)
+            else:
+                # Pass on other arch settings unmodified. Like 'x86_64'.
+                print("Build ARCH=" + str(self.settings.arch) + " headers_install")
+                self.run("make headers_install ARCH=" + str(self.settings.arch) + " INSTALL_HDR_PATH=" + self.package_folder)
+
