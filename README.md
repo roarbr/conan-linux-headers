@@ -12,7 +12,7 @@ For instance the conan arch=armv8 means 64-bit ARM, translated to ARCH=arm64 for
 Older ARM versions like armv6 is means ARCH=arm (32-bit ARM).
 This build script assumes all other arm settings than armv8 means ARCH=arm.
 
-Other platforms are on from conan **arch** to kbuild **ARCH** unmodified. Only 'x86_64' is tested apart from 'arm'.
+Other platforms are used from conan **arch** to kbuild **ARCH** unmodified. Only 'x86_64' is tested apart from 'arm'.
 
 # Build
 The package clone git tag from kernel git stable.
